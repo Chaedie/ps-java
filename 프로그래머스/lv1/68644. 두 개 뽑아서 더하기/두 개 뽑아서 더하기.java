@@ -13,8 +13,6 @@ class Solution {
             }
         }
         
-        int[] answer = set.stream().mapToInt(x->x).toArray();
-        Arrays.sort(answer);
-        return answer;
+        return set.stream().sorted().mapToInt(x->x).toArray();
     }
 }
