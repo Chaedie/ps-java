@@ -1,0 +1,20 @@
+-- 코드를 입력하세요
+SELECT o.ANIMAL_ID, o.ANIMAL_TYPE, o.NAME
+FROM ANIMAL_INS AS i
+RIGHT OUTER JOIN ANIMAL_OUTS AS o
+    ON i.ANIMAL_ID = o.ANIMAL_ID
+WHERE o.ANIMAL_ID IS NOT NULL
+    AND (i.SEX_UPON_INTAKE NOT LIKE "Spayed%"
+        AND i.SEX_UPON_INTAKE NOT LIKE "Neutered%")
+    AND (o.SEX_UPON_OUTCOME LIKE "Spayed%"
+        OR o.SEX_UPON_OUTCOME LIKE "Neutered%")
+ORDER BY o.ANIMAL_ID
+    
+
+
+# INS일땐 중성화 ㄴ 
+# OUTS일땐 중성화 ㅇ 
+
+# 나간애들 중에
+# RIGHT OUTER JOIN 으로 나간애들 찾고
+# o.ANIMAL_ID IS NOT NULL
