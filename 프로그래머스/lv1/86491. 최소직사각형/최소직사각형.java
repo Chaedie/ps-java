@@ -2,29 +2,41 @@ import java.util.*;
 
 class Solution {
     public int solution(int[][] sizes) {
-        int answer = 0;
-        
-        // 가로세로 중 큰값이 가로로 오도록
-        for (int i = 0; i < sizes.length; i++) {
-            int first = sizes[i][0];
-            int second = sizes[i][1];
-            if (first < second) {
-                sizes[i][0] = second;
-                sizes[i][1] = first;
-            }
-        }
-        
         // 가로 중 큰값, 세로 중 큰값 찾아서 곱
         int maxW = 0;
         int maxH = 0;
         for (int[] size : sizes) {
-            maxW = Math.max(maxW, size[0]);
-            maxH = Math.max(maxH, size[1]);
+            maxW = Math.max(maxW, Math.max(size[0], size[1]));
+            maxH = Math.max(maxH, Math.min(size[0], size[1]));
         }
         
         return maxW * maxH;
     }
 }
+
+// public int solution(int[][] sizes) {
+//     int answer = 0;
+
+//     // 가로세로 중 큰값이 가로로 오도록
+//     for (int i = 0; i < sizes.length; i++) {
+//         int first = sizes[i][0];
+//         int second = sizes[i][1];
+//         if (first < second) {
+//             sizes[i][0] = second;
+//             sizes[i][1] = first;
+//         }
+//     }
+
+//     // 가로 중 큰값, 세로 중 큰값 찾아서 곱
+//     int maxW = 0;
+//     int maxH = 0;
+//     for (int[] size : sizes) {
+//         maxW = Math.max(maxW, size[0]);
+//         maxH = Math.max(maxH, size[1]);
+//     }
+
+//     return maxW * maxH;
+// }
 
 // public int solution(int[][] sizes) {
 //     int answer = 0;
