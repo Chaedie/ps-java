@@ -32,7 +32,7 @@ class Solution {
         String returnValue = String.join("", answers);
         if (returnValue.equals("")) {
             return "-1";
-        } else if (returnValue.replaceAll("0","").equals("")) {
+        } else if (returnValue.charAt(0) == '0') {
             return "0";
         }
         
