@@ -9,9 +9,7 @@ class Solution {
         // DFS로 2 이상부터 부분집합을 만들고
         // 2이상인 갯수별로 Count해서 가장 많이 나온 세트를 answer에 담으면 됨
         // 오름차순으로 정렬해서 return
-        for (int len: course) {
-            courses.add(len);
-        }
+        for (int len: course) { courses.add(len); }
 
         for (String order: orders) {
             String[] ord = order.split("");
@@ -22,7 +20,6 @@ class Solution {
         for (String str: substrings){
             map.put(str, map.getOrDefault(str, 0) + 1);
         }
-        System.out.println(map);
         
         int[] maxNums = new int[11];
         for (Map.Entry<String, Integer> entry: map.entrySet()) {
@@ -43,7 +40,6 @@ class Solution {
         }
         
         Iterator iter = set.iterator();
-        StringBuilder sb = new StringBuilder();
         String[] answer = new String[set.size()];
         int i = 0;
         while(iter.hasNext()) {
