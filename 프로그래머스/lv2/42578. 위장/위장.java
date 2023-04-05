@@ -11,8 +11,8 @@ class Solution {
         }
         
         int answer = 1;
-        for (Map.Entry<String, Integer> entry : map.entrySet()) {
-            answer *= map.get(entry.getKey()) + 1;
+        for (int value : map.values()) {
+            answer *= value + 1;
         }
         
         return answer - 1;
