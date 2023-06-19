@@ -1,28 +1,27 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
 
-        int[] dp = new int[11];
-        dp[1] = 1;
-        dp[2] = 2;
-        dp[3] = 4;
-
+        List<Integer> dp = new ArrayList<>();
+        dp.add(0, 0);
+        dp.add(1, 1);
+        dp.add(2, 2);
+        dp.add(3, 4);
         for (int i = 4; i < 11; i++) {
-            dp[i] = dp[i - 1] + dp[i - 2] + dp[i - 3];
+            int num = dp.get(i - 1) + dp.get(i - 2) + dp.get(i - 3);
+            dp.add(i, num);
         }
 
-        int n = Integer.valueOf(br.readLine());
         for (int i = 0; i < n; i++) {
-            int num = Integer.valueOf(br.readLine());
-            System.out.println(dp[num]);
-
+            int num = Integer.parseInt(br.readLine());
+            System.out.println(dp.get(num));
         }
-
-        br.close();
     }
 }
-
