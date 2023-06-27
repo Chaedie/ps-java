@@ -1,57 +1,55 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class Main {
-
-    static int[][] graph;
-    static boolean[] visited;
-    static int n = 0;
-    static int m = 0;
-    static int count = 0;
+    private static int n;
+    private static int m;
+    private static int[][] map;
+    private static boolean[] check;
+    private static int count = 0;
+    private static Queue<Integer> queue = new LinkedList<>();
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-        n = Integer.valueOf(st.nextToken());
-        m = Integer.valueOf(st.nextToken());
-
-        graph = new int[1001][1001];
-
+        n = Integer.parseInt(st.nextToken());
+        m = Integer.parseInt(st.nextToken());
+        map = new int[n + 1][n + 1];
+        check = new boolean[n + 1];
         for (int i = 0; i < m; i++) {
             st = new StringTokenizer(br.readLine());
-            int a = Integer.valueOf(st.nextToken());
-            int b = Integer.valueOf(st.nextToken());
-            graph[a][b] = 1;
-            graph[b][a] = 1;
+            int x = Integer.parseInt(st.nextToken());
+            int y = Integer.parseInt(st.nextToken());
+            map[x][y] = 1;
+            map[y][x] = 1;
         }
-        // solution
-        // 그래프를 그려줌
-        // 연결 요소 : 섬이라고 보면 됨
-        // 노드를 순회하면서 연결되어 있는 애들은 비짓체크
-        // 한 노드에서 dfs 종료되면 count++
-        visited = new boolean[n + 1];
 
         for (int i = 1; i <= n; i++) {
-            if (!visited[i]) {
-                dfs(i);
+            if (!check[i]) {
+                queue.add(i);
+                bfs(i);
+                check[i] = true;
                 count++;
             }
         }
         System.out.println(count);
-        br.close();
     }
 
-    private static void dfs(int v) {
-        visited[v] = true;
-
-        for (int i = 1; i <= n; i++) {
-            if (graph[v][i] == 1 && !visited[i]) {
-                visited[i] = true;
-                dfs(i);
+    private static void bfs(int start) {
+        while (!queue.isEmpty()) {
+            int current = queue.poll();
+            for (int i = 1; i <= n; i++) {
+                if (!check[i] && map[current][i] == 1) {
+                    queue.add(i);
+                    check[i] = true;
+                }
             }
         }
+
     }
 }
-
